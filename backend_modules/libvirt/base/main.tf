@@ -33,6 +33,7 @@ locals {
     debian11o       = "${var.use_mirror_images ? "http://${var.mirror}" : "https://cloud.debian.org"}/cdimage/cloud/bullseye/latest/debian-11-genericcloud-amd64.qcow2"
     opensuse152-ci-pr        = "${var.use_mirror_images ? "http://${var.mirror}" : "https://download.opensuse.org"}/repositories/systemsmanagement:/sumaform:/images:/libvirt/images/opensuse152-ci-pr.x86_64.qcow2"
     opensuse153-ci-pr        = "${var.use_mirror_images ? "http://${var.mirror}" : "https://download.opensuse.org"}/repositories/systemsmanagement:/sumaform:/images:/libvirt/images/opensuse153-ci-pr.x86_64.qcow2"
+    opensuse153-ci-pr-jordi  = "https://download.opensuse.org/repositories/home:/jordimassaguerpla:/branches:/systemsmanagement:/sumaform:/images:/libvirt:/disable_official_repos/images/opensuse153-ci-pr.x86_64-0.1.0-Build4.1.qcow2"
     opensuse153-ci-pr-client = "${var.use_mirror_images ? "http://${var.mirror}" : "https://download.opensuse.org"}/repositories/systemsmanagement:/sumaform:/images:/libvirt/images/opensuse153-ci-pr-client.x86_64.qcow2"
   }
   pool               = lookup(var.provider_settings, "pool", "default")
