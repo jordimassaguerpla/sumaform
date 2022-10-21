@@ -117,7 +117,7 @@ module_server_applications_update_repo:
 {% if 'uyuni-released' in grains['product_version'] %}
 proxy_pool_repo:
   pkgrepo.managed:
-    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/repositories/systemsmanagement:/Uyuni:/Stable/images/repo/Uyuni-Proxy-POOL-x86_64-Media1/
+    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Stable/images/repo/Uyuni-Proxy-POOL-x86_64-Media1/
     - refresh: True
     - priority: 97
 {% endif %}
@@ -126,7 +126,7 @@ proxy_pool_repo:
 {% if grains['osfullname'] == 'Leap' %}
 proxy_pool_repo:
   pkgrepo.managed:
-    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/repositories/systemsmanagement:/Uyuni:/Master/images/repo/Uyuni-Proxy-POOL-x86_64-Media1/
+    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master/images/repo/Uyuni-Proxy-POOL-x86_64-Media1/
     - refresh: True
     - priority: 97
 {% else %}
@@ -148,7 +148,7 @@ server_devel_releasenotes_repo:
 {% if grains['osfullname'] == 'Leap' %}
 testing_overlay_devel_repo:
   pkgrepo.managed:
-    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/repositories/systemsmanagement:/Uyuni:/Master/images/repo/Testing-Overlay-POOL-x86_64-Media1/
+    - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master/images/repo/Testing-Overlay-POOL-x86_64-Media1/
     - refresh: True
     - priority: 96
 {% else %}
@@ -233,7 +233,7 @@ testing_overlay_devel_repo:
     - priority: 96
 {% endif %}
 
-# repositories needed for containerized proxy
+# sync-obs needed for containerized proxy
 {% if grains.get('proxy_containerized') | default(false, true) or grains.get('testsuite') | default(false, true)%}
 
 # temporary hack since for now we only want to add this on head and uyuni

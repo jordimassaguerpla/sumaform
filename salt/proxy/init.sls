@@ -43,7 +43,7 @@ proxy-packages:
 {% if 'head' in grains.get('product_version') %}
     {% set client_tools_repo =  grains.get("mirror") | default("download.suse.de/ibs", true) ~ '/Devel:/Galaxy:/Manager:/Head:/SLE15-SUSE-Manager-Tools/images/repo/SLE-15-Manager-Tools-POOL-x86_64-Media1/' %}
 {% else %}
-    {% set client_tools_repo =  grains.get("mirror") | default("download.opensuse.org", true) ~ '/repositories/systemsmanagement:/Uyuni:/Master:/openSUSE_Leap_15-Uyuni-Client-Tools/openSUSE_Leap_15.0/' %}
+    {% set client_tools_repo =  grains.get("mirror") | default("download.opensuse.org", true) ~ '/sync-obs/systemsmanagement:/Uyuni:/Master:/openSUSE_Leap_15-Uyuni-Client-Tools/openSUSE_Leap_15.0/' %}
 {% endif %}
 
 proxy_client_tools_repo:
