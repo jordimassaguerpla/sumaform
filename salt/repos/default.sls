@@ -41,8 +41,7 @@ tools_pool_repo:
   pkgrepo.managed:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/openSUSE_Leap_15-Uyuni-Client-Tools/openSUSE_Leap_15.0/
     - refresh: True
-    - gpgcheck: 1
-    - gpgkey: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/openSUSE_Leap_15-Uyuni-Client-Tools/openSUSE_Leap_15.0/repodata/repomd.xml.key
+    - gpgcheck: 0
     - priority: 98
 
 {% if grains['osrelease_info'][0] == 15 and grains['osrelease_info'][1] >= 3 %}
@@ -59,6 +58,7 @@ tools_pool_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Stable:/openSUSE_Leap_15-Uyuni-Client-Tools/openSUSE_Leap_15.0/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
 {% endif %}
 {% endif %} {# not grains.get('roles') or ('server' not in grains.get('roles') and 'proxy' not in grains.get('roles')) #}
 
@@ -231,6 +231,7 @@ tools_pool_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Stable:/SLE12-Uyuni-Client-Tools/SLE_12/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
 {% endif %}
 
 {% if 'nightly' in grains.get('product_version') | default('', true) %}
@@ -253,6 +254,7 @@ tools_additional_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/SLE12-Uyuni-Client-Tools/SLE_12/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
 {% endif %}
 
 {% endif %} {# not grains.get('roles') or ('server' not in grains.get('roles') and 'proxy' not in grains.get('roles')) #}
@@ -285,6 +287,7 @@ tools_pool_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Stable:/SLE15-Uyuni-Client-Tools/SLE_15/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
 {% endif %}
 
 {% if 'nightly' in grains.get('product_version') | default('', true) %}
@@ -323,6 +326,7 @@ tools_update_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/SLE15-Uyuni-Client-Tools/SLE_15/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
 
 {% if grains['osrelease_info'][0] == 15 and grains['osrelease_info'][1] >= 3 %}
 # Needed because in sles15SP3 and opensuse 15.3 and higher firewalld will replace this package.
@@ -531,6 +535,7 @@ tools_pool_repo:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Stable:/{{centos_client_tool_prefix}}{{ release }}-Uyuni-Client-Tools/{{centos_client_tool_prefix}}_{{ release }}/
     - refresh: True
     - priority: 98
+    - gpgcheck: 0
     - require:
       - cmd: uyuni_key
 {% endif %}
@@ -564,8 +569,7 @@ tools_update_repo:
     - humanname: tools_update_repo
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/{{centos_client_tool_prefix}}{{ release }}-Uyuni-Client-Tools/{{centos_client_tool_prefix}}_{{ release }}/
     - refresh: True
-    - gpgcheck: 1
-    - gpgkey: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Master:/{{centos_client_tool_prefix}}{{ release }}-Uyuni-Client-Tools/{{centos_client_tool_prefix}}_{{ release }}/repodata/repomd.xml.key
+    - gpgcheck: 0
     - priority: 98
     - require:
       - cmd: uyuni_key
@@ -647,6 +651,7 @@ tools_update_repo:
     - refresh: True
     - name: deb {{ tools_repo_url }} /
     - key_url: {{ tools_repo_url }}/Release.key
+    - gpgcheck: 0
 
 tools_update_repo_raised_priority:
   file.managed:
