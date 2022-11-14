@@ -50,6 +50,7 @@ proxy_client_tools_repo:
   pkgrepo.managed:
     - baseurl: http://{{client_tools_repo}}
     - refresh: True
+    - gpgcheck: 0
 
 proxy-container-packages:
   pkg.installed:

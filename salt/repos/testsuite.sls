@@ -16,8 +16,7 @@ test_repo_rpm_pool:
   pkgrepo.managed:
     - baseurl: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Test-Packages:/Pool/rpm/
     - refresh: True
-    - gpgcheck: 1
-    - gpgkey: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Test-Packages:/Pool/rpm/repodata/repomd.xml.key
+    - gpgcheck: 0
 
 {% elif grains['os_family'] == 'Debian' %}
 
@@ -26,7 +25,7 @@ test_repo_deb_pool:
     - name: deb http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Test-Packages:/Pool/deb/ /
     - refresh: True
     - file: /etc/apt/sources.list.d/test_repo_deb_pool.list
-    - key_url: http://{{ grains.get("mirror") | default("download.opensuse.org", true) }}/sync-obs/systemsmanagement:/Uyuni:/Test-Packages:/Pool/deb/Release.key
+    - gpgcheck: 0
 
 {% endif %}
 {% endif %}
