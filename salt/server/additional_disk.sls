@@ -38,19 +38,23 @@ spacewalk_partition:
 
 www:
   group.present:
-    - gid: 469
+    # - gid: 469
+    - gid: 498
     - system: True
 
 wwwrun:
   group.present:
-    - gid: 466
+    # - gid: 466
+    - gid: 497
     - system: True
   user.present:
     - fullname: WWW daemon apache
     - shell: /usr/sbin/nologin
     - home: /var/lib/wwwrun
-    - uid: 466
-    - gid: 466
+    # - uid: 466
+    - uid: 498
+    # - gid: 466
+    - gid: 497
     - groups:
       - wwwrun
       - www
@@ -106,7 +110,8 @@ postgres:
     - fullname: PostgreSQL Server
     - shell: /bin/bash
     - home: /var/lib/pgsql
-    - uid: 464
+    # - uid: 464
+    - uid: 477
     - gid: 464
     - groups:
       - postgres
