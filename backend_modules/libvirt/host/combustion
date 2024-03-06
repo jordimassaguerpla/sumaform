@@ -14,14 +14,24 @@ systemctl enable sshd.service
 ${ gpg_keys }
 
 # Add repositories
-zypper ar http://${ use_mirror_images ? mirror : "download.opensuse.org" }/repositories/SUSE:/CA/15.5/ ca_suse
+zypper ar http://${ user_mirror_image ? mirror : "download.opensuse.org" }/repositories/SUSE:/CA/15.5/ ca_suse
 %{ if container_server || container_proxy }
-zypper ar http://${ use_mirror_images ? mirror : "download.opensuse.org" }/repositories/systemsmanagement:/Uyuni:/Master:/ContainerUtils/openSUSE_Leap_Micro_5.5/ container_utils
+zypper ar http://${ user_mirror_image ? mirror : "download.opensuse.org" }/repositories/systemsmanagement:/Uyuni:/Master:/ContainerUtils/openSUSE_Leap_Micro_5.5/ container_utils
 %{ endif }
 
 %{ if testsuite }
-zypper ar http://${ use_mirror_images ? mirror : "download.opensuse.org" }/repositories/systemsmanagement:/Uyuni:/Test-Packages:/Pool/rpm/ test_packages_pool
+zypper ar http://${ user_mirror_image ? mirror : "download.opensuse.org" }/repositories/systemsmanagement:/Uyuni:/Test-Packages:/Pool/rpm/ test_packages_pool
 %{ endif }
+
+echo "additional repos"
+for i in ${additional_repos};do
+  name=$(echo $i | cut -d= -f1)
+  url=$(echo $i | cut -d= -f2)
+  echo "Adding $name with url $url"
+  zypper ar $url $name
+  echo "---"
+done
+
 
 # Install packages
 PACKAGES="qemu-guest-agent avahi ca-certificates"
@@ -43,6 +53,7 @@ PACKAGES="$PACKAGES salt-minion"
 %{ endif }
 
 %{ if testsuite }
+# PACKAGES="$PACKAGES andromeda-dummy milkyway-dummy virgo-dummy wget timezone aaa_base-extras"
 PACKAGES="$PACKAGES andromeda-dummy milkyway-dummy virgo-dummy timezone"
 %{ endif }
 zypper --non-interactive install $PACKAGES
